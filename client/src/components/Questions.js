@@ -10,7 +10,7 @@ export default function Questions({ onChecked }) {
   const [checked, setChecked] = useState(undefined);
   const { trace } = useSelector((state) => state.questions);
   const result = useSelector((state) => state.result.result);
-  const [{ isLoading, apiData, serverError }] = useFetchQuestion();
+  const [{ isLoading, serverError }] = useFetchQuestion();
 
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
@@ -19,6 +19,7 @@ export default function Questions({ onChecked }) {
 
   useEffect(() => {
     dispatch(updateResult({ trace, checked }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 
   function onSelect(i) {
@@ -56,7 +57,7 @@ export default function Questions({ onChecked }) {
               {q}
             </label>
             <div
-              className={`check ${result[trace] == i ? "checked" : ""}`}
+              className={`check ${result[trace] === i ? "checked" : ""}`}
             ></div>
           </li>
         ))}
