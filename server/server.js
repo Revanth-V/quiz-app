@@ -11,7 +11,13 @@ const app = express();
 
 /** app middlewares */
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://quiz-app-frontend-yd5m.onrender.com",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 config();
 
